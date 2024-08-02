@@ -1,0 +1,31 @@
+﻿@model VendiCore.Models.Products
+
+@{
+    ViewData["Title"] = "Delete Product";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="bi bi-trash"></i> Delete Product</h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h5>@Model.Name</h5>
+                        <p><strong>Price:</strong> @Model.Price USD</p>
+                        <p><strong>Quantity Available:</strong> @Model.QuantityAvailable</p>
+                    </div>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="ID" />
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Delete</button>
+                            <a href="@Url.Action("Index")" class="btn btn-secondary ms-2"><i class="bi bi-arrow-left"></i> Back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

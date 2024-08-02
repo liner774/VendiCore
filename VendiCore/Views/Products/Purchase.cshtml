@@ -1,0 +1,38 @@
+﻿@model VendiCore.Models.Products
+
+@{
+    ViewData["Title"] = "Purchase Product";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Purchase Product</h2>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title">Product Details</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Purchase">
+                        <div class="mb-3">
+                            <label for="Name" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Price" class="form-label">Price</label>
+                            <input type="text" class="form-control" id="Price" name="Price" value="@Model.Price.ToString("C", System.Globalization.CultureInfo.CurrentCulture)" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Quantity" class="form-label">Quantity</label>
+                            <input type="number" class="form-control" id="Quantity" name="Quantity" min="1" max="@Model.QuantityAvailable" required />
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a class="btn btn-secondary" href="@Url.Action("Index", "Products")">Back</a>
+                            <button type="submit" class="btn btn-primary">Purchase</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
