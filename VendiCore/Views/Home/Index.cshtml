@@ -2,7 +2,32 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container text-center">
+    <h1 class="display-4 mb-4">Welcome to VendiCore</h1>
+    <p class="lead mb-4">Your ultimate vending machine solution. Explore and manage products, and make purchases effortlessly.</p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Browse Products</h5>
+                    <p class="card-text">View and select products from our extensive list. Check prices and availability.</p>
+                    <a href="@Url.Action("Purchase", "Purchase")" class="btn btn-primary">
+                        <i class="bi bi-box"></i> View Products
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Manage Inventory</h5>
+                    <p class="card-text">Admins can manage the products, update prices, and track inventory.</p>
+                    <a href="@Url.Action("Index", "Products")" class="btn btn-secondary">
+                        <i class="bi bi-gear"></i> Manage Inventory
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,0 +1,74 @@
+﻿@model VendiCore.Models.Products
+
+@{
+    ViewData["Title"] = "Purchase Product";
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const quantityInput = document.getElementById('Quantity');
+            const totalPriceInput = document.getElementById('TotalPrice');
+            const increaseButton = document.getElementById('increaseQuantity');
+            const decreaseButton = document.getElementById('decreaseQuantity');
+            const pricePerUnit = @Model.Price;
+
+            function updateTotalPrice() {
+                const quantity = parseInt(quantityInput.value, 10) || 0;
+                const totalPrice = quantity * pricePerUnit;
+                totalPriceInput.value = `$${totalPrice.toFixed(2)}`;
+            }
+
+            increaseButton.addEventListener('click', function () {
+                if (parseInt(quantityInput.value, 10) < parseInt(quantityInput.max, 10)) {
+                    quantityInput.value = parseInt(quantityInput.value, 10) + 1;
+                    updateTotalPrice();
+                }
+            });
+
+            decreaseButton.addEventListener('click', function () {
+                if (parseInt(quantityInput.value, 10) > 1) {
+                    quantityInput.value = parseInt(quantityInput.value, 10) - 1;
+                    updateTotalPrice();
+                }
+            });
+
+            quantityInput.addEventListener('input', updateTotalPrice);
+
+            updateTotalPrice(); 
+        });
+    </script>
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="bi bi-cart-plus"></i> Purchase @Model.Name</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="PurchaseProduct" method="post">
+                        <div class="form-group mb-3">
+                            <label for="Quantity" class="form-label">Quantity</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="Quantity" name="quantity" min="1" max="@Model.QuantityAvailable" value="1" required />
+                                <button type="button" class="btn btn-outline-secondary" id="increaseQuantity">+</button>
+                                <button type="button" class="btn btn-outline-secondary" id="decreaseQuantity">-</button>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="TotalPrice" class="form-label">Total Price</label>
+                            <input type="text" class="form-control" id="TotalPrice" name="totalPrice" readonly />
+                        </div>
+                        <input type="hidden" name="id" value="@Model.ID" />
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-cart-check"></i> Confirm Purchase</button>
+                            <a href="@Url.Action("Purchase")" class="btn btn-secondary ms-2"><i class="bi bi-arrow-left"></i> Back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,15 +8,55 @@ using VendiCore.Data;
 public class ProductsController : Controller
 {
     private readonly VendingMachineContext _context;
+    private const int PageSize = 10;
 
     public ProductsController(VendingMachineContext context)
     {
         _context = context;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string sortOrder, int page = 1)
     {
-        return View(await _context.Products.ToListAsync());
+        ViewData["CurrentSort"] = sortOrder;
+        ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+        ViewData["PriceSortParam"] = sortOrder == "Price" ? "price_desc" : "Price";
+        ViewData["QuantitySortParam"] = sortOrder == "Quantity" ? "quantity_desc" : "Quantity";
+
+        var products = from p in _context.Products
+                       select p;
+
+        switch (sortOrder)
+        {
+            case "name_desc":
+                products = products.OrderByDescending(p => p.Name);
+                break;
+            case "Price":
+                products = products.OrderBy(p => p.Price);
+                break;
+            case "price_desc":
+                products = products.OrderByDescending(p => p.Price);
+                break;
+            case "Quantity":
+                products = products.OrderBy(p => p.QuantityAvailable);
+                break;
+            case "quantity_desc":
+                products = products.OrderByDescending(p => p.QuantityAvailable);
+                break;
+            default:
+                products = products.OrderBy(p => p.Name);
+                break;
+        }
+
+        var totalItems = await products.CountAsync();
+        var productsPaged = await products
+            .Skip((page - 1) * PageSize)
+            .Take(PageSize)
+            .ToListAsync();
+
+        ViewData["CurrentPage"] = page;
+        ViewData["TotalPages"] = (int)Math.Ceiling(totalItems / (double)PageSize);
+
+        return View(productsPaged);
     }
 
     public IActionResult Create()
