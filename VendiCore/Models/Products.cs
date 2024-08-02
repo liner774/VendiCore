@@ -14,10 +14,10 @@ namespace VendiCore.Models
 
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than zero.")]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = "Quantity cannot be negative.")]
-        public int QuantityAvailable { get; set; }
+        public int? QuantityAvailable { get; set; }
     }
 }
