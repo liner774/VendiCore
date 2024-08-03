@@ -4,9 +4,11 @@ using VendiCore.Data;
 using VendiCore.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VendiCore.Controllers
 {
+    [Authorize]
     public class TransactionController : Controller
     {
         private readonly VendingMachineContext _context;

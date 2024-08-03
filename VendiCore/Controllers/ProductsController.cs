@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VendiCore.Data;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize]
 public class ProductsController : Controller
 {
     private readonly VendingMachineContext _context;

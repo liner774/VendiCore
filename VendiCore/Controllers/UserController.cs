@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VendiCore.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VendiCore.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly VendingMachineContext _context;
