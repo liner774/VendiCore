@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace VendiCore.Models
 {
@@ -13,6 +14,10 @@ namespace VendiCore.Models
         [Required]
         public string Email { get; set; }
 
+        [DisplayName("Password")]
         public string PasswordHash { get; set; }
+
+        [Required]
+        public string Role { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VendiCore.Data;
 
@@ -11,9 +12,11 @@ using VendiCore.Data;
 namespace VendiCore.Migrations
 {
     [DbContext(typeof(VendingMachineContext))]
-    partial class VendingMachineContextModelSnapshot : ModelSnapshot
+    [Migration("20240802233814_addRole")]
+    partial class addRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
