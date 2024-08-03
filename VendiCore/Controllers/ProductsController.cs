@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using VendiCore.Data;
 using Microsoft.AspNetCore.Authorization;
 
-[Authorize]
+[Authorize(Policy = "AdminOnly")]
 public class ProductsController : Controller
 {
     private readonly VendingMachineContext _context;

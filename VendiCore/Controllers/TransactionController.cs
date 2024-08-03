@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace VendiCore.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "AdminOnly")]
     public class TransactionController : Controller
     {
         private readonly VendingMachineContext _context;
