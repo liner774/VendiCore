@@ -33,7 +33,6 @@ namespace VendiCore.Controllers
                 return View(model);
             }
 
-            // Validate user credentials
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.UserName == model.Username && u.PasswordHash == model.Password);
 
@@ -43,7 +42,6 @@ namespace VendiCore.Controllers
                 return View(model);
             }
 
-            // Create claims
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.UserName),

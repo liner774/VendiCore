@@ -13,7 +13,7 @@ builder.Services.AddDbContext<VendingMachineContext>(option =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Account/Login"; // Redirect to Login page
+        options.LoginPath = "/Account/Login"; 
     });
 
 var app = builder.Build();
@@ -30,11 +30,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // Add this line
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}"); // Redirect to Login by default
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();
