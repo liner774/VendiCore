@@ -23,7 +23,6 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy =>
         policy.RequireRole("Admin"));
-
 });
 
 var app = builder.Build();
@@ -52,5 +51,10 @@ app.MapControllerRoute(
     pattern: "{controller=Admin}/{action=Index}/{id?}")
     .RequireAuthorization("AdminOnly");
 
+app.MapControllerRoute(
+    name: "api",
+    pattern: "api/{controller=ProductsApi}/{action=Get}/{id?}");
+
+app.MapControllers();
 
 app.Run();
