@@ -25,10 +25,10 @@
                                 <th>Product</th>
                                 <th>User</th>
                                 <th>
-                                    <a href="@Url.Action("Index", new { sortOrder = dateSortParam })">Purchase Date</a>
+                                    <a href="@Url.Action("Index", new { sortOrder = dateSortParam, page = currentPage })">Purchase Date</a>
                                 </th>
                                 <th>
-                                    <a href="@Url.Action("Index", new { sortOrder = quantitySortParam })">Quantity Purchased</a>
+                                    <a href="@Url.Action("Index", new { sortOrder = quantitySortParam, page = currentPage })">Quantity Purchased</a>
                                 </th>
                             </tr>
                         </thead>

@@ -17,6 +17,7 @@ public class PurchaseController : Controller
     [HttpGet]
     public async Task<IActionResult> Purchase()
     {
+        ViewBag.SuccessMessage = TempData["SuccessMessage"];
         var products = await _context.Products.ToListAsync();
         return View(products);
     }
@@ -48,7 +49,7 @@ public class PurchaseController : Controller
         var transaction = new Transaction
         {
             ProductID = id,
-            UserID = 1, //for demo
+            UserID = 1, // For demo purposes
             PurchaseDate = DateTime.Now,
             QuantityPurchased = quantity
         };
@@ -56,6 +57,7 @@ public class PurchaseController : Controller
         _context.Transactions.Add(transaction);
         await _context.SaveChangesAsync();
 
-        return RedirectToAction(nameof(Index));
+        TempData["SuccessMessage"] = "Purchase successful!";
+        return RedirectToAction("Purchase");
     }
 }

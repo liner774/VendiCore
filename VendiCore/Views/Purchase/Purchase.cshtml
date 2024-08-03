@@ -1,23 +1,37 @@
 ﻿@model IEnumerable<VendiCore.Models.Products>
 
 @{
-    ViewData["Title"] = "Purchase Products";
+    ViewData["Title"] = "Purchase";
 }
 
-<div class="container">
-    <h1 class="my-4">Purchase Products</h1>
+<div class="container mt-4">
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.SuccessMessage
+        </div>
+    }
     <div class="row">
-        @foreach (var product in Model)
+        @foreach (var item in Model)
         {
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">@product.Name</h5>
-                        <p class="card-text">Price: @product.Price</p>
-                        <p class="card-text">Available Quantity: @product.QuantityAvailable</p>
-                        <a href="@Url.Action("PurchaseProduct", "Purchase", new { id = product.ID })" class="btn btn-primary">
-                            <i class="bi bi-cart"></i> Purchase
-                        </a>
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">Price: $@item.Price</p>
+                        <p class="card-text">Available: @item.QuantityAvailable</p>
+                        @if (item.QuantityAvailable > 0)
+                        {
+                            <a href="@Url.Action("PurchaseProduct", new { id = item.ID })" class="btn btn-primary">
+                                <i class="bi bi-cart-plus"></i> Purchase
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="btn btn-danger">
+                                <i class="bi bi-exclamation-triangle-fill"></i>
+                                Out of stock</span>
+                        }
                     </div>
                 </div>
             </div>
